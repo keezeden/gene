@@ -6,6 +6,11 @@ Gene is a genetic algorithm that currently evaluates a population based on its s
 
 Gene is primarily a learning exercise for understanding and implementing algorithms. I also like biology
 
+## Goals
+
+- More diverse characteristics
+- More complex evaluation function
+
 ## Resources
 
 https://en.wikipedia.org/wiki/Genetic_algorithm

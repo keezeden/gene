@@ -8,4 +8,5 @@ Gene is primarily a learning exercise for understanding and implementing algorit
 
 ## Resources
 
+https://en.wikipedia.org/wiki/Genetic_algorithm
 https://www.tutorialspoint.com/genetic_algorithms/index.html

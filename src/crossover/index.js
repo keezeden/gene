@@ -7,7 +7,7 @@ const crossover = population => {
 
   const bred = parents.map(([parentX, parentY]) => {
     const speedX = random(parentX.speed);
-    const speedY = random(parentY.speed);
+    const speedY = parentY.speed - speedX;
 
     const speed = speedX + speedY;
     return [

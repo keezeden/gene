@@ -1,4 +1,4 @@
-const { times } = require('lodash');
+import { times } from 'lodash';
 
 const random = max => {
   return Math.floor(Math.random() * max);
@@ -12,8 +12,8 @@ const member = (parentX = parent(), parentY = parent()) => {
   const speed = (parentX.speed + parentY.speed) / 2;
 
   return {
-    speed
+    speed,
   };
 };
 
-module.exports = { member, random, times };
+export { member, random, times };

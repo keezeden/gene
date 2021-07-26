@@ -1,10 +1,10 @@
 {
   "name": "gene",
   "version": "1.0.0",
-  "description": "",
+  "description": "Gene is a genetic algorithm that currently evaluates a population based on its speed",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "vite"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,8 @@
   "homepage": "https://github.com/keezeden/gene#readme",
   "dependencies": {
     "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "vite": "^2.4.3"
   }
 }

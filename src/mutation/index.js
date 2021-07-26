@@ -1,4 +1,4 @@
-const { random } = require('../utilities');
+import { random } from '../utilities/algorithm';
 
 const mutation = population => {
   const mutated = population.map(member => {
@@ -12,4 +12,4 @@ const mutation = population => {
   return mutated;
 };
 
-module.exports = { mutation };
+export { mutation };

@@ -1,13 +1,7 @@
-const { crossover } = require('./crossover');
-const { evaluation } = require('./evaluation');
-const { initialization } = require('./initialization');
-const { mutation } = require('./mutation');
-const { selection } = require('./selection');
+import { crossover } from './crossover';
+import { evaluation } from './evaluation';
+import { initialization } from './initialization';
+import { mutation } from './mutation';
+import { selection } from './selection';
 
-module.exports = {
-  initialization,
-  crossover,
-  selection,
-  evaluation,
-  mutation
-};
+export { initialization, crossover, selection, evaluation, mutation };

@@ -1,4 +1,4 @@
-const { random } = require('../utilities');
+import { random } from '../utilities/algorithm';
 
 const crossover = population => {
   const parents = population.reduce((rows, key, index) => {
@@ -12,7 +12,7 @@ const crossover = population => {
     const speed = speedX + speedY;
     return [
       { speed, fitness: speed },
-      { speed, fitness: speed }
+      { speed, fitness: speed },
     ];
   });
 
@@ -21,4 +21,4 @@ const crossover = population => {
   return crossed;
 };
 
-module.exports = { crossover };
+export { crossover };

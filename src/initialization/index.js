@@ -1,4 +1,4 @@
-const { member } = require('../utilities');
+import { member } from '../utilities/algorithm';
 
 const initialization = size => {
   const population = [...new Array(size)].map((val, index) => member());
@@ -6,4 +6,4 @@ const initialization = size => {
   return population;
 };
 
-module.exports = { initialization };
+export { initialization };

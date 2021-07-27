@@ -5,24 +5,42 @@ class Simulation {
   constructor(size) {
     this.canvas = new Canvas();
 
+    this.cycles = 0;
     this.population = initialization(size, this.canvas);
   }
 
   start() {
-    requestAnimationFrame(this.simulate.bind(this));
+    this.generation();
   }
 
-  simulate() {
+  strongest() {
+    const [leader] = this.population.sort(({ fitness: a }, { fitness: b }) => b - a);
+
+    console.warn('Strongest: ', leader);
+  }
+
+  evolve() {
     this.population = evaluation(this.population);
     this.population = selection(this.population);
     this.population = crossover(this.population);
     this.population = mutation(this.population);
 
-    const [leader] = this.population.sort(({ fitness: a }, { fitness: b }) => b - a);
+    this.strongest();
+  }
 
-    this.animate();
+  simulate(callback) {
+    const exit = this.population.every(member => member.y < 0);
 
-    requestAnimationFrame(this.simulate.bind(this));
+    if (exit) return callback();
+    requestAnimationFrame(() => this.animate.bind(this)(callback));
+  }
+
+  generation() {
+    this.simulate(() => {
+      this.evolve();
+      return;
+      this.generation();
+    });
   }
 
   update() {
@@ -34,8 +52,9 @@ class Simulation {
     this.update();
   }
 
-  animate() {
+  animate(callback) {
     this.draw();
+    requestAnimationFrame(() => this.simulate.bind(this)(callback));
   }
 }
 

@@ -1,4 +1,4 @@
-import { random } from '../../utilities/algorithm';
+import { random } from '../utilities/algorithm';
 
 const crossover = population => {
   const parents = population.reduce((rows, key, index) => {

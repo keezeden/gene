@@ -1,19 +1,20 @@
 class Member {
-  constructor(x, y, { canvas }) {
+  constructor(x, y, xv = 0, yv = 0, { canvas }) {
     this.canvas = canvas;
     this.x = x;
     this.y = y;
-    this.v = 1;
+    this.xv = xv;
+    this.yv = yv;
   }
 
   update() {
-    this.x = this.x + this.v;
-    this.y = this.y + this.v;
+    this.x = this.x + this.xv;
+    this.y = this.y + this.yv;
     this.draw();
   }
 
   draw() {
-    this.canvas.triangle(this.x, this.y, 20, 40);
+    this.canvas.triangle(this.x, this.y, 10, 20);
   }
 }
 

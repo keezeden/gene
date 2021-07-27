@@ -1,6 +1,7 @@
-import { random } from '../utilities/algorithm';
+import { random } from '../../utilities/algorithm';
 
 const crossover = population => {
+  return population;
   const parents = population.reduce((rows, key, index) => {
     return (index % 2 == 0 ? rows.push([key]) : rows[rows.length - 1].push(key)) && rows; // idk how this works
   }, []);

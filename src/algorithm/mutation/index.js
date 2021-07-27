@@ -1,6 +1,8 @@
-import { random } from '../utilities/algorithm';
+import { random } from '../../utilities/algorithm';
 
 const mutation = population => {
+  return population;
+
   const mutated = population.map(member => {
     if (random(10) > 7) {
       // 20% mutation rate

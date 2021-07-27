@@ -1,6 +1,7 @@
-import { times, random } from '../utilities/algorithm';
+import { times, random } from '../../utilities/algorithm';
 
 const selection = population => {
+  return population;
   // Roulette Wheel Selection strategy
   const roulette = population
     .map(member => times(member.fitness >= 1 ? member.fitness : 1, () => member))

@@ -1,4 +1,6 @@
 const evaluation = population => {
+  return population;
+
   const evaluated = population.map(member => {
     const { speed } = member;
 

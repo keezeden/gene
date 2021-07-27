@@ -5,7 +5,6 @@ class Simulation {
   constructor(size) {
     this.canvas = new Canvas();
 
-    this.cycles = 0;
     this.population = initialization(size, this.canvas);
   }
 
@@ -14,9 +13,9 @@ class Simulation {
   }
 
   strongest() {
-    const [leader] = this.population.sort(({ fitness: a }, { fitness: b }) => b - a);
+    const [leader] = this.population.sort(({ fitness: a }, { fitness: b }) => a - b);
 
-    console.warn('Strongest: ', leader);
+    document.getElementById('leader').innerText = `Speed: ${leader.yv}`;
   }
 
   evolve() {
@@ -29,7 +28,7 @@ class Simulation {
   }
 
   simulate(callback) {
-    const exit = this.population.every(member => member.y < 0);
+    const exit = this.population.every(member => member.done);
 
     if (exit) return callback();
     requestAnimationFrame(() => this.animate.bind(this)(callback));
@@ -38,7 +37,6 @@ class Simulation {
   generation() {
     this.simulate(() => {
       this.evolve();
-      return;
       this.generation();
     });
   }

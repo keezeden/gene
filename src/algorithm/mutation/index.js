@@ -1,12 +1,16 @@
+import { Member } from '../../types';
 import { random } from '../../utilities/algorithm';
+import { evaluate } from '../evaluation';
 
 const mutation = population => {
-  return population;
-
   const mutated = population.map(member => {
     if (random(10) > 7) {
       // 20% mutation rate
-      return { ...member, speed: member.speed + random(2) };
+      return evaluate(
+        new Member(member.x, member.y, member.xv, member.yv - random(5), {
+          canvas: member.canvas,
+        })
+      );
     }
 
     return member;

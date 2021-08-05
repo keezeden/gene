@@ -1,4 +1,5 @@
 import { initialization, evaluation, selection, crossover, mutation } from '../../algorithm';
+import { intersects } from './utilities';
 
 class Simulation {
   constructor(size, map) {
@@ -32,6 +33,20 @@ class Simulation {
     this.strongest();
   }
 
+  collision() {
+    this.population.forEach(member => {
+      const hitbox = [
+        { x: member.x - 5, y: member.y },
+        { x: member.x + 5, y: member.y - 10 },
+      ];
+      this.map.map(([start, finish]) => {
+        if (intersects(start, finish, hitbox[0], hitbox[1])) {
+          member.kill();
+        }
+      });
+    });
+  }
+
   update() {
     this.population.forEach(member => member.update());
   }
@@ -45,12 +60,13 @@ class Simulation {
   loop() {
     if (!this.started) return;
 
-    const exit = this.population.every(member => !member.alive);
-
-    if (exit) this.generation();
+    this.collision();
 
     this.update();
     this.draw();
+    const exit = this.population.every(member => !member.alive);
+    // if (exit) this.generation();
+    if (exit) return console.warn('All members of the population are dead');
   }
 }
 

@@ -9,14 +9,21 @@ class Member {
     this.genes = makeGenes();
   }
 
+  kill() {
+    this.alive = false;
+  }
+
   update() {
+    if (!this.alive) return;
+
     this.x += this.genes[this.age].x;
     this.y -= this.genes[this.age].y;
     this.age++;
   }
 
   draw() {
-    window.canvas.triangle(this.x, this.y, 10, 20);
+    if (this.alive) window.canvas.triangle(this.x, this.y, 10, 20, 'black');
+    else window.canvas.triangle(this.x, this.y, 10, 20, 'red');
   }
 }
 

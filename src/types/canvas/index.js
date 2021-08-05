@@ -13,13 +13,15 @@ class Canvas {
     this.canvas.lineWidth = 1;
   }
 
-  triangle(x, y, width, height) {
+  triangle(x, y, width, height, color) {
+    this.canvas.fillStyle = color;
     this.canvas.beginPath();
     this.canvas.moveTo(x, y - height / 2);
     this.canvas.lineTo(x - width / 2, y + height / 2);
     this.canvas.lineTo(x + width / 2, y + height / 2);
     this.canvas.lineTo(x, y - height / 2);
     this.canvas.fill();
+    this.canvas.fillStyle = 'black';
   }
 
   clear() {

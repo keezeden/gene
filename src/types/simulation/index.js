@@ -1,15 +1,20 @@
 import { initialization, evaluation, selection, crossover, mutation } from '../../algorithm';
-import { Canvas } from '../canvas';
 
 class Simulation {
-  constructor(size) {
-    this.canvas = new Canvas();
-
+  constructor(size, map) {
     this.population = initialization(size, this.canvas);
+    this.map = map;
+    this.started = false;
+
+    window.canvas.loop(this.loop.bind(this));
+  }
+
+  terrain(map) {
+    map.map(([start, finish]) => window.canvas.line(start, finish, 10));
   }
 
   start() {
-    this.generation();
+    this.started = true;
   }
 
   strongest() {
@@ -18,7 +23,7 @@ class Simulation {
     document.getElementById('leader').innerText = `Speed: ${leader.yv}`;
   }
 
-  evolve() {
+  generation() {
     this.population = evaluation(this.population);
     this.population = selection(this.population);
     this.population = crossover(this.population);
@@ -27,32 +32,25 @@ class Simulation {
     this.strongest();
   }
 
-  simulate(callback) {
-    const exit = this.population.every(member => member.done);
-
-    if (exit) return callback();
-    requestAnimationFrame(() => this.animate.bind(this)(callback));
-  }
-
-  generation() {
-    this.simulate(() => {
-      this.evolve();
-      this.generation();
-    });
-  }
-
   update() {
     this.population.forEach(member => member.update());
   }
 
   draw() {
-    this.canvas.clear();
-    this.update();
+    window.canvas.clear();
+    this.terrain(this.map);
+    this.population.forEach(member => member.draw());
   }
 
-  animate(callback) {
+  loop() {
+    if (!this.started) return;
+
+    const exit = this.population.every(member => !member.alive);
+
+    if (exit) this.generation();
+
+    this.update();
     this.draw();
-    requestAnimationFrame(() => this.simulate.bind(this)(callback));
   }
 }
 

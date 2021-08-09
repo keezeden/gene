@@ -1,12 +1,13 @@
 import { makeGenes } from './utiltiies';
 
 class Member {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
+  constructor(index, genes = makeGenes()) {
+    this.index = index;
+    this.x = 10 * this.index + 300;
+    this.y = 900;
     this.age = 0;
     this.alive = true;
-    this.genes = makeGenes();
+    this.genes = genes;
   }
 
   kill() {
@@ -18,7 +19,7 @@ class Member {
 
     this.x += this.genes[this.age].x;
     this.y -= this.genes[this.age].y;
-    this.age++;
+    this.age += 1;
   }
 
   draw() {

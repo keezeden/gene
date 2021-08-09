@@ -7,20 +7,18 @@ const crossover = population => {
   }, []);
 
   const bred = parents.map(([parentX, parentY], index) => {
-    const speedX = random(parentX.yv);
-    const speedY = parentY.yv - speedX;
+    const crosspoint = random(parentX.genes.length);
 
-    const speed = speedX + speedY;
-    return [
-      new Member(5 * index * 2, 1000, 0, speed, {
-        canvas: parentX.canvas,
-        fitness: parentX.fitness,
-      }),
-      new Member(5 * index * 2 + 1, 1000, 0, speed, {
-        canvas: parentX.canvas,
-        fitness: parentX.fitness,
-      }),
-    ];
+    const first = parentX.genes.slice(0, crosspoint);
+    const second = parentY.genes.slice(crosspoint, -1);
+
+    const firstGenes = [...first, ...second];
+    const secondGenes = [...second, ...first];
+
+    const childX = new Member(parentX.index, firstGenes);
+    const childY = new Member(parentY.index, secondGenes);
+
+    return [childX, childY];
   });
 
   const crossed = bred.flat();

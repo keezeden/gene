@@ -1,9 +1,7 @@
-import { Member } from '../../types';
-
 const evaluate = member => {
-  const fitness = member.yv;
+  member.fitness = member.age;
 
-  return new Member(member.x, member.y, member.xv, member.yv, { canvas: member.canvas, fitness });
+  return member;
 };
 
 const evaluation = population => {

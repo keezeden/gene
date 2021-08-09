@@ -21,7 +21,7 @@ class Simulation {
   strongest() {
     const [leader] = this.population.sort(({ fitness: a }, { fitness: b }) => a - b);
 
-    document.getElementById('leader').innerText = `Speed: ${leader.yv}`;
+    document.getElementById('leader').innerHTML = `Age: ${leader.age}`;
   }
 
   generation() {
@@ -37,7 +37,7 @@ class Simulation {
     this.population.forEach(member => {
       const hitbox = [
         { x: member.x - 5, y: member.y },
-        { x: member.x + 5, y: member.y - 10 },
+        { x: member.x + 5, y: member.y - 10 }
       ];
       this.map.map(([start, finish]) => {
         if (intersects(start, finish, hitbox[0], hitbox[1])) {
@@ -65,8 +65,8 @@ class Simulation {
     this.update();
     this.draw();
     const exit = this.population.every(member => !member.alive);
-    // if (exit) this.generation();
-    if (exit) return console.warn('All members of the population are dead');
+
+    if (exit) this.generation();
   }
 }
 

@@ -1,6 +1,6 @@
 import { times, random } from 'lodash';
 
-const selection = population => {
+const roulette = population => {
   // Roulette Wheel Selection strategy
   const roulette = population
     .map(member => times(member.fitness >= 1 ? member.fitness : 1, () => member))
@@ -11,6 +11,21 @@ const selection = population => {
     const pointer = random(roulette.length - 1);
     return roulette[pointer];
   });
+};
+
+const tournament = population => {
+  return population;
+};
+
+const selection = population => {
+  switch (window.config.SELECTION_STRATEGY) {
+    case 'ROULETTE':
+      return roulette(population);
+    case 'TOURNAMENT':
+      return tournament(population);
+    default:
+      return roulette(population);
+  }
 };
 
 export { selection };

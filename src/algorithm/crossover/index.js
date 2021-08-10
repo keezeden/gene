@@ -1,12 +1,12 @@
 import { Member } from '../../types';
-import { random } from '../../utilities/algorithm';
+import { random } from 'lodash';
 
 const crossover = population => {
   const parents = population.reduce((rows, key, index) => {
     return (index % 2 == 0 ? rows.push([key]) : rows[rows.length - 1].push(key)) && rows; // idk how this works
   }, []);
 
-  const bred = parents.map(([parentX, parentY], index) => {
+  const bred = parents.map(([parentX, parentY]) => {
     const crosspoint = random(parentX.genes.length);
 
     const first = parentX.genes.slice(0, crosspoint);
@@ -21,9 +21,7 @@ const crossover = population => {
     return [childX, childY];
   });
 
-  const crossed = bred.flat();
-
-  return crossed;
+  return bred.flat();
 };
 
 export { crossover };

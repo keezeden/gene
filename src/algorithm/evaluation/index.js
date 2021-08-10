@@ -5,9 +5,7 @@ const evaluate = member => {
 };
 
 const evaluation = population => {
-  const evaluated = population.map(evaluate);
-
-  return evaluated;
+  return population.map(evaluate);
 };
 
 export { evaluation, evaluate };

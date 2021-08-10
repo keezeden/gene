@@ -1,5 +1,4 @@
 import { Member } from '../../types';
-import { random } from '../../utilities/algorithm';
 import { evaluate } from '../evaluation';
 
 const mutation = population => {

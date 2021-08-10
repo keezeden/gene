@@ -7,6 +7,8 @@ class Simulation {
     this.map = map;
     this.started = false;
 
+    this.generationCount = 0;
+
     window.canvas.loop(this.loop.bind(this));
   }
 
@@ -19,9 +21,14 @@ class Simulation {
   }
 
   strongest() {
-    const [leader] = this.population.sort(({ fitness: a }, { fitness: b }) => a - b);
+    const [leader] = this.population.sort(({ age: a }, { age: b }) => a - b);
 
-    document.getElementById('leader').innerHTML = `Age: ${leader.age}`;
+    document.getElementById('leader').innerHTML = `${leader.age}`;
+  }
+
+  ui() {
+    this.strongest();
+    document.getElementById('generation').innerHTML = `${this.generationCount}`;
   }
 
   generation() {
@@ -30,14 +37,15 @@ class Simulation {
     this.population = crossover(this.population);
     this.population = mutation(this.population);
 
-    this.strongest();
+    this.generationCount++;
+    this.ui();
   }
 
   collision() {
     this.population.forEach(member => {
       const hitbox = [
         { x: member.x - 5, y: member.y },
-        { x: member.x + 5, y: member.y - 10 }
+        { x: member.x + 5, y: member.y - 10 },
       ];
       this.map.map(([start, finish]) => {
         if (intersects(start, finish, hitbox[0], hitbox[1])) {

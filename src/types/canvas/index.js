@@ -31,10 +31,10 @@ class Canvas {
   }
 
   loop(callback) {
-    requestAnimationFrame(() => {
+    setTimeout(() => {
       callback();
       this.loop(callback);
-    });
+    }, 1);
   }
 }
 
